@@ -1,7 +1,6 @@
 (*
 
-
-The MIT License (MIT)
+MIT License
 
 Copyright (c) 2016 Guotou
 
@@ -22,6 +21,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
 
 
 *)
@@ -71,9 +72,9 @@ type
 var
   frmMain: TfrmMain;
 
-  ipAddr: string;        //ipµØÖ·
-  filePath: string;          //Â·¾¶
-  ipWithPath: string;       //´«ÊäÈ«ipµØÖ·+ÎÄ¼ş
+  ipAddr: string;        //ipåœ°å€
+  filePath: string;          //è·¯å¾„
+  ipWithPath: string;       //ä¼ è¾“å…¨ipåœ°å€+æ–‡ä»¶
   path:string;
 
 implementation
@@ -81,24 +82,24 @@ implementation
 {$R *.dfm}
 
 
-//ä¯ÀÀCIAÎÄ¼ş
+//æµè§ˆCIAæ–‡ä»¶
 procedure TfrmMain.btnBrowseClick(Sender: TObject);
 begin
-  dlgOpen.Filter:='CIAÎÄ¼ş(*.cia)|*.cia';
+  dlgOpen.Filter:='CIAæ–‡ä»¶(*.cia)|*.cia';
   dlgOpen.Execute;
   filePath:=dlgOpen.GetNamePath;
-  edtCIAFile.Text:=dlgOpen.FileName;  //½«ÎÄ¼şÍêÕûÂ·¾¶Ğ´ÈëÎÄ±¾¿ò
+  edtCIAFile.Text:=dlgOpen.FileName;  //å°†æ–‡ä»¶å®Œæ•´è·¯å¾„å†™å…¥æ–‡æœ¬æ¡†
 end;
 
 
-//ÍË³ö
+//é€€å‡º
 procedure TfrmMain.btnExitClick(Sender: TObject);
 begin
   Application.Terminate
 end;
 
 
-//ipµØÖ·ÊäÈë¿ò
+//ipåœ°å€è¾“å…¥æ¡†
 procedure TfrmMain.edtIpAddrChange(Sender: TObject);
 begin
   ipAddr:= edtIpAddr.Text
@@ -107,20 +108,21 @@ end;
 
 
 
-//¿ªÊ¼´«Êä°´Å¥
+//å¼€å§‹ä¼ è¾“æŒ‰é’®
 procedure TfrmMain.btnStartClick(Sender: TObject);
 begin
-  ipWithPath:= PChar(ipAddr)+' '+dlgOpen.FileName;       //ÍêÕûip+ÎÄ¼şÃû
-    if MessageBox(0,'¿ªÊ¼´«Êä£¿','È·ÈÏ',MB_ICONINFORMATION+MB_OkCancel)=ID_OK then          //È·ÈÏ
+  ipWithPath:= PChar(ipAddr)+' '+dlgOpen.FileName;       //å®Œæ•´ip+æ–‡ä»¶å
+    if MessageBox(0,'å¼€å§‹ä¼ è¾“ï¼Ÿ','ç¡®è®¤',MB_ICONINFORMATION+MB_OkCancel)=ID_OK then          //ç¡®è®¤
       begin
 
 
-        ShellExecute(Handle,'open','sockfilego.exe',PChar(ipWithPath),PChar(path),SW_SHOWNORMAL);      //Ê¹ÓÃsockfilego´«Êä
+        ShellExecute(Handle,'open','sockfilego.exe',PChar(ipWithPath),PChar(path),SW_SHOWNORMAL);      //ä½¿ç”¨sockfilegoä¼ è¾“
 
 
       end;
 end;
 
+//è·å–å½“å‰è·¯å¾„
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
         path:=GetCurrentDir + '\';
